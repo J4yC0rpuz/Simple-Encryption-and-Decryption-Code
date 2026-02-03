@@ -1,0 +1,63 @@
+import string
+
+#['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a',
+# 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+# 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
+# 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+# 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+# 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '"', '#', '$',
+# '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/',
+# ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^',
+# '_', '`', '{', '|', '}', '~', ' ', '\t', '\n', '\r',
+# '\x0b', '\x0c']
+
+#print(string.printable)
+myCharacters = list(string.printable) #convert to list
+#print(myCharacters)
+
+keyNumber = 15
+input = input("INPUT YOUR MESSAGE HERE: ")
+output = ""
+LENGTH = len(myCharacters)
+#print(LENGTH) # 100 max index 99
+
+for char in input:
+    #print(char)
+    currentIndex = myCharacters.index(char)
+    #print(currentIndex)
+    newIndex = currentIndex + keyNumber
+    if newIndex > 99:
+        newIndex = newIndex - 100
+    newChar = myCharacters[newIndex]
+    #print(newChar)
+    output = output + newChar
+
+print("INPUT MESSAGE : " + input)
+print("ENCRYPTED MESSAGE :" + output)
+
+
+#ENCRYPTION
+#"HELLO" -> ENCRYPT -> "UZASS" -> ATTAC/.KER -> DESTINATION
+#"HELLO" -> ATTACKER -> DESTINATION
+#"HELLO" -> 6 ENCRYPT -> DESTINATION (USASS) -> 6 : HELLO
+
+print("----------------------------------------------------")
+encryptedMessage = output #output was assigned into new variable "encryptedMessage"
+#print(encryptedMessage)
+decryptedMessage = ""
+
+for newChar in encryptedMessage: #goes through each character in the encrypted message
+    #print(newChar)
+    encryptedIndex = myCharacters.index(newChar) #index of every character in the encrypted message
+    #print(encryptedIndex)
+    newEncryptedIndex = encryptedIndex - keyNumber #difference of number of index of each letter and keyNumber
+    if newEncryptedIndex > 99:
+        newEncryptedIndex = newEncryptedIndex - 100 #if the new index is greater than 99, subtract it with 100
+    newerCharacters = myCharacters[newEncryptedIndex] #getting the new characters according to the new index
+    #print(newerCharacters)
+    decryptedMessage = decryptedMessage + newerCharacters #adding the decryptedMessage with the new message that formed.
+
+print("ENCRYPTED MESSAGE: " + encryptedMessage)
+print("DECRYPTED MESSAGE: " + decryptedMessage) #shows the original message that the sender intends to give to the receiver
+
+print("-----------------------------------")
